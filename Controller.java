@@ -1,5 +1,7 @@
 package aaron.com.pokedexapp;
 
+import android.app.Activity;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -14,12 +16,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Aaron on 1/9/2018.
  */
 
-public class Controller implements Callback<PokedexAPI> {
+public class Controller implements Callback<AllPokemonResponse> {
 
     static final String BASE_URL = "http://pokeapi.co";
+    private PokemonListActivity mainActivity;
+
+    public Controller(PokemonListActivity mainActivity){
+        this.mainActivity = mainActivity;
+    }
+
 
     //TODO: Change this to void and make asynchronous
-    public AllPokemonResponse getPokemon(){
+    public void getPokemon(){
         Gson gson = new Gson();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -30,24 +38,25 @@ public class Controller implements Callback<PokedexAPI> {
         PokedexAPI pokedexAPI = retrofit.create(PokedexAPI.class);
 
         Call<AllPokemonResponse> call = pokedexAPI.getPokemon(10, 5);
-        //call.enqueue();
-        try {
+        call.enqueue(this);
+        //call.enqueue(Callback<AllPokemonResponse>);
+        /*try {
             Response<AllPokemonResponse> response = call.execute();
             AllPokemonResponse responseBody = response.body();
             return responseBody;
         }catch(IOException e){
             e.printStackTrace();
         }
-        return null;
+        return null;*/
     }
 
     @Override
-    public void onResponse(Call<PokedexAPI> call, Response<PokedexAPI> response) {
-
+    public void onResponse(Call<AllPokemonResponse> call, Response<AllPokemonResponse> response) {
+        mainActivity.updatePokemonList(response.body());
     }
 
     @Override
-    public void onFailure(Call<PokedexAPI> call, Throwable t) {
-
+    public void onFailure(Call<AllPokemonResponse> call, Throwable t) {
+        //TODO: Handle this error
     }
 }

@@ -4,7 +4,7 @@ package aaron.com.pokedexapp;
  * Created by Aaron on 1/9/2018.
  */
 
-public class PokemonLinks {
+public class PokemonLink {
     private String url;
     private String name;
 

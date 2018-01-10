@@ -10,7 +10,7 @@ public class AllPokemonResponse {
     private int count;
     private String previous;
     private String next;
-    private List<PokemonLinks> results;
+    private List<PokemonLink> results;
 
     public int getCount() {
         return count;
@@ -36,11 +36,11 @@ public class AllPokemonResponse {
         this.next = next;
     }
 
-    public List<PokemonLinks> getPokemonLinks() {
+    public List<PokemonLink> getPokemonLinks() {
         return results;
     }
 
-    public void setPokemonLinks(List<PokemonLinks> pokemonLinks) {
+    public void setPokemonLinks(List<PokemonLink> pokemonLinks) {
         this.results = pokemonLinks;
     }
 }
