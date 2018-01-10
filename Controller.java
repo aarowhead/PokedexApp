@@ -1,10 +1,6 @@
 package aaron.com.pokedexapp;
 
-import android.app.Activity;
-
 import com.google.gson.Gson;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,8 +21,10 @@ public class Controller implements Callback<AllPokemonResponse> {
         this.mainActivity = mainActivity;
     }
 
+    public void showPokemonInfo(PokemonInfo pokemonInfo){
+        mainActivity.showPokemonInfo(pokemonInfo);
+    }
 
-    //TODO: Change this to void and make asynchronous
     public void getPokemon(){
         Gson gson = new Gson();
 
@@ -39,15 +37,6 @@ public class Controller implements Callback<AllPokemonResponse> {
 
         Call<AllPokemonResponse> call = pokedexAPI.getPokemon(10, 5);
         call.enqueue(this);
-        //call.enqueue(Callback<AllPokemonResponse>);
-        /*try {
-            Response<AllPokemonResponse> response = call.execute();
-            AllPokemonResponse responseBody = response.body();
-            return responseBody;
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        return null;*/
     }
 
     @Override

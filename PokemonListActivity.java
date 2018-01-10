@@ -20,7 +20,7 @@ public class PokemonListActivity extends AppCompatActivity {
 
         pokemonRecyclerView = (RecyclerView)findViewById(R.id.pokemon_list_recycler_view);
         pokemonRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        pokemonListAdapter = new PokemonListAdapter();
+        pokemonListAdapter = new PokemonListAdapter(controller);
         pokemonRecyclerView.setAdapter(pokemonListAdapter);
 
         controller.getPokemon();
@@ -29,5 +29,13 @@ public class PokemonListActivity extends AppCompatActivity {
     public void updatePokemonList(AllPokemonResponse allPokemon){
         pokemonListAdapter.setMyPokemon(allPokemon);
         pokemonListAdapter.notifyDataSetChanged();
+    }
+
+    public void showPokemonInfo(PokemonInfo pokemonInfo){
+        PokemonInfoDialogFragment infoDialog = new PokemonInfoDialogFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("pokemonInfo", pokemonInfo);
+        infoDialog.setArguments(args);
+        infoDialog.show(getSupportFragmentManager(), "PokemonInfo");
     }
 }

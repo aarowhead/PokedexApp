@@ -1,5 +1,6 @@
 package aaron.com.pokedexapp;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,11 @@ import android.widget.TextView;
 public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.ViewHolder> {
 
     private AllPokemonResponse myPokemon;
+    private Controller controller;
+
+    public PokemonListAdapter(Controller controller){
+        this.controller = controller;
+    }
 
     public void setMyPokemon(AllPokemonResponse myPokemon) {
         this.myPokemon = myPokemon;
@@ -25,10 +31,12 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView pokemonName;
+        public CardView pokemonCard;
 
         public ViewHolder(View v){
             super(v);
             pokemonName = (TextView)v.findViewById(R.id.pokemon_text_view);
+            pokemonCard = (CardView)v.findViewById(R.id.pokemon_card_view);
         }
     }
 
@@ -37,21 +45,21 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.pokemon_card, parent, false);
 
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
-
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        PokemonLink pokemon = myPokemon.getPokemonLinks().get(position);
+        PokemonInfo pokemon = myPokemon.getPokemonLinks().get(position);
         holder.pokemonName.setText(pokemon.getName());
+
+        holder.pokemonCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.showPokemonInfo(myPokemon.getPokemonLinks().get(position));
+            }
+        });
 
     }
 
