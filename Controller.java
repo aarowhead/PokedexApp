@@ -35,7 +35,7 @@ public class Controller implements Callback<AllPokemonResponse> {
 
         PokedexAPI pokedexAPI = retrofit.create(PokedexAPI.class);
 
-        Call<AllPokemonResponse> call = pokedexAPI.getPokemon(0, 20);
+        Call<AllPokemonResponse> call = pokedexAPI.getPokemon(949, 0);
         call.enqueue(this);
     }
 

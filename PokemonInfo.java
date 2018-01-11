@@ -47,7 +47,7 @@ public class PokemonInfo implements Serializable, Comparable<PokemonInfo> {
             }
         }
 
-        return -1;
+        return 1;
     }
 
 }
