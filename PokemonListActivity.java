@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import retrofit2.Call;
+
 public class PokemonListActivity extends AppCompatActivity implements ConnectionErrorDialogFragment.TryAgainListener {
 
     private RecyclerView pokemonRecyclerView;
@@ -23,7 +25,7 @@ public class PokemonListActivity extends AppCompatActivity implements Connection
         pokemonListAdapter = new PokemonListAdapter(controller);
         pokemonRecyclerView.setAdapter(pokemonListAdapter);
 
-        controller.getPokemon();
+        //controller.getPokemon(10,0);
     }
 
     public void updatePokemonList(AllPokemonResponse allPokemon){
@@ -39,16 +41,17 @@ public class PokemonListActivity extends AppCompatActivity implements Connection
         infoDialog.show(getSupportFragmentManager(), "PokemonInfo");
     }
 
-    public void showConnectionError(String errorInfo){
+    public void showConnectionError(String errorInfo, Call<AllPokemonResponse> call){
         ConnectionErrorDialogFragment errorDialog = new ConnectionErrorDialogFragment();
         Bundle args = new Bundle();
         args.putString("errorInfo", errorInfo);
+        args.putSerializable("failedCall", new CallSerializableWrapper(call));
         errorDialog.setArguments(args);
         errorDialog.show(getSupportFragmentManager(), "ErrorInfo");
     }
 
     @Override
-    public void onTryAgain() {
-        controller.getPokemon();
+    public void onTryAgain(Call<AllPokemonResponse> call) {
+        controller.resendCall(call);
     }
 }

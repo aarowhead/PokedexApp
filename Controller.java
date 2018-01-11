@@ -2,6 +2,8 @@ package aaron.com.pokedexapp;
 
 import com.google.gson.Gson;
 
+import java.util.Queue;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,7 +27,7 @@ public class Controller implements Callback<AllPokemonResponse> {
         mainActivity.showPokemonInfo(pokemonInfo);
     }
 
-    public void getPokemon(){
+    public void getPokemon(int limit, int offset){
         Gson gson = new Gson();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -35,7 +37,11 @@ public class Controller implements Callback<AllPokemonResponse> {
 
         PokedexAPI pokedexAPI = retrofit.create(PokedexAPI.class);
 
-        Call<AllPokemonResponse> call = pokedexAPI.getPokemon(949, 0);
+        Call<AllPokemonResponse> call = pokedexAPI.getPokemon(limit, offset);
+        call.enqueue(this);
+    }
+
+    public void resendCall(Call<AllPokemonResponse> call){
         call.enqueue(this);
     }
 
@@ -46,6 +52,6 @@ public class Controller implements Callback<AllPokemonResponse> {
 
     @Override
     public void onFailure(Call<AllPokemonResponse> call, Throwable t) {
-        mainActivity.showConnectionError(t.getMessage());
+        mainActivity.showConnectionError(t.getMessage(), call.clone());
     }
 }
