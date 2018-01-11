@@ -39,6 +39,7 @@ public class Controller implements Callback<AllPokemonResponse> {
 
         Call<AllPokemonResponse> call = pokedexAPI.getPokemon(limit, offset);
         call.enqueue(this);
+        mainActivity.setAwaitingResponse(true);
     }
 
     public void resendCall(Call<AllPokemonResponse> call){
@@ -48,10 +49,12 @@ public class Controller implements Callback<AllPokemonResponse> {
     @Override
     public void onResponse(Call<AllPokemonResponse> call, Response<AllPokemonResponse> response) {
         mainActivity.updatePokemonList(response.body());
+        mainActivity.setAwaitingResponse(false);
     }
 
     @Override
     public void onFailure(Call<AllPokemonResponse> call, Throwable t) {
         mainActivity.showConnectionError(t.getMessage(), call.clone());
+        mainActivity.setAwaitingResponse(false);
     }
 }

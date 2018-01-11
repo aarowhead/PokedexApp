@@ -1,6 +1,5 @@
 package aaron.com.pokedexapp;
 
-import android.support.v7.util.SortedList;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,12 +20,10 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
 
     private List<PokemonInfo> myPokemonInfo;
     private Controller controller;
-    private int requestedIndex;
 
     public PokemonListAdapter(Controller controller){
         this.controller = controller;
         myPokemonInfo = new ArrayList<>();
-        requestedIndex = 0;
     }
 
     public void setMyPokemon(List<PokemonInfo> myPokemonInfo) {
@@ -59,28 +56,21 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        if(position < myPokemonInfo.size()){
-            PokemonInfo pokemon = myPokemonInfo.get(position);
-            holder.pokemonName.setText(pokemon.getName());
-            holder.progressBar.setVisibility(View.GONE);
+        PokemonInfo pokemon = myPokemonInfo.get(position);
+        holder.pokemonName.setText(pokemon.getName());
+        holder.progressBar.setVisibility(View.GONE);
 
-            holder.pokemonCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    controller.showPokemonInfo(myPokemonInfo.get(holder.getAdapterPosition()));
-                }
-            });
-        }else if(myPokemonInfo.size() < 949) {
-            if(position >= requestedIndex) {
-                controller.getPokemon(30, position);
-                requestedIndex += 30;
+        holder.pokemonCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.showPokemonInfo(myPokemonInfo.get(holder.getAdapterPosition()));
             }
-        }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return 949;
+        return myPokemonInfo.size();
     }
 }
