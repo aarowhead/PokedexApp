@@ -32,7 +32,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
 
     public void setMyPokemon(List<PokemonInfo> myPokemonInfo) {
         this.myPokemonInfo.addAll(myPokemonInfo);
-        Collections.sort(myPokemonInfo);
+        Collections.sort(this.myPokemonInfo);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
