@@ -1,4 +1,4 @@
-package aaron.com.pokedexapp;
+package aaron.com.pokedexapp.UserInterface;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import aaron.com.pokedexapp.Models.AllPokemonResponse;
+import aaron.com.pokedexapp.Models.CallSerializableWrapper;
+import aaron.com.pokedexapp.Controller;
+import aaron.com.pokedexapp.Models.PokemonInfo;
+import aaron.com.pokedexapp.R;
 import retrofit2.Call;
 
 public class PokemonListActivity extends AppCompatActivity implements ConnectionErrorDialogFragment.TryAgainListener {

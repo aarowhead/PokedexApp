@@ -1,6 +1,4 @@
-package aaron.com.pokedexapp;
-
-import android.support.annotation.NonNull;
+package aaron.com.pokedexapp.Models;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package aaron.com.pokedexapp;
+package aaron.com.pokedexapp.UserInterface;
 
 
 import android.app.Dialog;
@@ -7,6 +7,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
+import aaron.com.pokedexapp.Models.AllPokemonResponse;
+import aaron.com.pokedexapp.Models.CallSerializableWrapper;
+import aaron.com.pokedexapp.R;
 import retrofit2.Call;
 
 /**

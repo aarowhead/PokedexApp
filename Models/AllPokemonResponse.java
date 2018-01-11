@@ -1,4 +1,4 @@
-package aaron.com.pokedexapp;
+package aaron.com.pokedexapp.Models;
 
 import java.util.List;
 

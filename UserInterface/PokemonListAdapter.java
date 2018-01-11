@@ -1,4 +1,4 @@
-package aaron.com.pokedexapp;
+package aaron.com.pokedexapp.UserInterface;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import aaron.com.pokedexapp.Controller;
+import aaron.com.pokedexapp.Models.PokemonInfo;
+import aaron.com.pokedexapp.R;
 
 /**
  * Created by Aaron on 1/9/2018.

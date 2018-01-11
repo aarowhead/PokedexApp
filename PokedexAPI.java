@@ -1,5 +1,6 @@
 package aaron.com.pokedexapp;
 
+import aaron.com.pokedexapp.Models.AllPokemonResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

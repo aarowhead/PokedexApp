@@ -1,10 +1,13 @@
-package aaron.com.pokedexapp;
+package aaron.com.pokedexapp.UserInterface;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+
+import aaron.com.pokedexapp.Models.PokemonInfo;
+import aaron.com.pokedexapp.R;
 
 /**
  * Created by Aaron on 1/9/2018.

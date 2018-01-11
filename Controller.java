@@ -2,8 +2,9 @@ package aaron.com.pokedexapp;
 
 import com.google.gson.Gson;
 
-import java.util.Queue;
-
+import aaron.com.pokedexapp.Models.AllPokemonResponse;
+import aaron.com.pokedexapp.Models.PokemonInfo;
+import aaron.com.pokedexapp.UserInterface.PokemonListActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,6 +40,8 @@ public class Controller implements Callback<AllPokemonResponse> {
 
         Call<AllPokemonResponse> call = pokedexAPI.getPokemon(limit, offset);
         call.enqueue(this);
+
+        //This prevents more requests for the same date being made while awaiting a response
         mainActivity.setAwaitingResponse(true);
     }
 
@@ -49,12 +52,16 @@ public class Controller implements Callback<AllPokemonResponse> {
     @Override
     public void onResponse(Call<AllPokemonResponse> call, Response<AllPokemonResponse> response) {
         mainActivity.updatePokemonList(response.body());
+
+        //Open up for another response to be sent
         mainActivity.setAwaitingResponse(false);
     }
 
     @Override
     public void onFailure(Call<AllPokemonResponse> call, Throwable t) {
         mainActivity.showConnectionError(t.getMessage(), call.clone());
+
+        //Open up for another response to be sent
         mainActivity.setAwaitingResponse(false);
     }
 }

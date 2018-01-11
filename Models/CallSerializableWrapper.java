@@ -1,7 +1,8 @@
-package aaron.com.pokedexapp;
+package aaron.com.pokedexapp.Models;
 
 import java.io.Serializable;
 
+import aaron.com.pokedexapp.Models.AllPokemonResponse;
 import retrofit2.Call;
 
 /**
