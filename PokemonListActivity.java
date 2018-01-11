@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-public class PokemonListActivity extends AppCompatActivity {
+public class PokemonListActivity extends AppCompatActivity implements ConnectionErrorDialogFragment.TryAgainListener {
 
     private RecyclerView pokemonRecyclerView;
     private PokemonListAdapter pokemonListAdapter;
@@ -27,7 +27,7 @@ public class PokemonListActivity extends AppCompatActivity {
     }
 
     public void updatePokemonList(AllPokemonResponse allPokemon){
-        pokemonListAdapter.setMyPokemon(allPokemon);
+        pokemonListAdapter.setMyPokemon(allPokemon.getPokemonInfo());
         pokemonListAdapter.notifyDataSetChanged();
     }
 
@@ -37,5 +37,18 @@ public class PokemonListActivity extends AppCompatActivity {
         args.putSerializable("pokemonInfo", pokemonInfo);
         infoDialog.setArguments(args);
         infoDialog.show(getSupportFragmentManager(), "PokemonInfo");
+    }
+
+    public void showConnectionError(String errorInfo){
+        ConnectionErrorDialogFragment errorDialog = new ConnectionErrorDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("errorInfo", errorInfo);
+        errorDialog.setArguments(args);
+        errorDialog.show(getSupportFragmentManager(), "ErrorInfo");
+    }
+
+    @Override
+    public void onTryAgain() {
+        controller.getPokemon();
     }
 }

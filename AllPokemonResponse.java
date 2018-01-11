@@ -36,11 +36,11 @@ public class AllPokemonResponse {
         this.next = next;
     }
 
-    public List<PokemonInfo> getPokemonLinks() {
+    public List<PokemonInfo> getPokemonInfo() {
         return results;
     }
 
-    public void setPokemonLinks(List<PokemonInfo> pokemonInfos) {
+    public void setPokemonInfo(List<PokemonInfo> pokemonInfos) {
         this.results = pokemonInfos;
     }
 }

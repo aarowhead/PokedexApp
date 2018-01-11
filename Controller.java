@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Controller implements Callback<AllPokemonResponse> {
 
-    static final String BASE_URL = "http://pokeapi.co";
+    private static final String BASE_URL = "http://pokeapi.co";
     private PokemonListActivity mainActivity;
 
     public Controller(PokemonListActivity mainActivity){
@@ -35,7 +35,7 @@ public class Controller implements Callback<AllPokemonResponse> {
 
         PokedexAPI pokedexAPI = retrofit.create(PokedexAPI.class);
 
-        Call<AllPokemonResponse> call = pokedexAPI.getPokemon(10, 5);
+        Call<AllPokemonResponse> call = pokedexAPI.getPokemon(0, 20);
         call.enqueue(this);
     }
 
@@ -46,6 +46,6 @@ public class Controller implements Callback<AllPokemonResponse> {
 
     @Override
     public void onFailure(Call<AllPokemonResponse> call, Throwable t) {
-        //TODO: Handle this error
+        mainActivity.showConnectionError(t.getMessage());
     }
 }

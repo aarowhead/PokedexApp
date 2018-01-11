@@ -17,7 +17,6 @@ public class PokemonInfoDialogFragment extends DialogFragment {
         Bundle args = getArguments();
         PokemonInfo pokemonInfo = (PokemonInfo)args.get("pokemonInfo");
 
-        // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(pokemonInfo.getName())
                 .setNegativeButton(R.string.close_button, new DialogInterface.OnClickListener() {
@@ -25,7 +24,7 @@ public class PokemonInfoDialogFragment extends DialogFragment {
                         dialog.dismiss();
                     }
                 });
-        // Create the AlertDialog object and return it
+
         return builder.create();
     }
 
